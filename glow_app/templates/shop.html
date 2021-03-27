@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+  h1 {
+    color: #545454;
+    font-family: 'Dosis', sans-serif;
+    text-align: center;
+  }
+
+  .title {
+    text-align: center;
+    font-family: 'Dosis', sans-serif;
+
+  }
+  .categories{
+    color: #000;
+    margin: 15px;
+  
+  }
+  .hov:hover{
+    background: rgb(255, 255, 255);
+  }
+
+</style>
+
+<hr>
+
+<body>
+  <h1>PRODUCTS</h1>
+  
+  
+    <h5> By Category: </h5>
+    {% for category in categories %}
+
+      <a href="/category/{{category.name}}" class="categories" style="color: #000;">{{category.name}}</a>
+
+  {% endfor %}
+  <div class="row row-cols-2 row-cols-md-6">
+    {% for item in items %}
+
+    <div class="col-md-3 " style="padding-top: 100px;">
+      <div style="width: 12rem;">
+        <a class="hov" href="{% url 'product' item.id %}" style="color: #545454;">
+        <img class="card-img-top" src="{{item.image.url}}" alt="Card image cap">
+        
+          <h5 class="title" ><strong>{{item.title}}</strong></h5>
+        
+        <hr>
+        <p class="title">{{item.price}} RF</p>
+      </a>
+      </div>
+    </div>
+
+    {% endfor %}
+
+  </div>
+</body>
+
+{% endblock %}

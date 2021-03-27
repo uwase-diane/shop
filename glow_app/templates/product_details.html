@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<style>
+    .container {
+
+        padding-top: 20px;
+
+    }
+
+    .btn {
+        border-radius: 0;
+        font-weight: 300;
+        margin-bottom: 30px;
+        padding-left: 100px;
+        padding-right: 100px;
+
+
+    }
+
+    .word {
+        font-family: 'Cairo', sans-serif;
+    }
+
+    .details {
+        color: #545454;
+        letter-spacing: 2px;
+    }
+
+    .detailsh {
+        font-family: 'Work Sans', sans-serif;
+        color: #545454;
+        letter-spacing: 2px;
+        font-size: 2em;
+    }
+
+    .detailsp {
+        padding-top: 40px;
+    }
+
+    .form-control {
+        border-radius: 0;
+        padding: 20px;
+    }
+
+    .card {
+        padding: 20px;
+        color: #4b4b4b;
+    }
+
+     form .textarea {
+        height: 100px;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .review-h {
+        font-family: 'Cairo', sans-serif;
+        letter-spacing: 1.6px;
+    }
+
+    .rating {
+        
+        display: flex;
+    }
+
+    .rating .star-widget input {
+        display: none;
+    }
+
+    .star-widget label {
+        font-size: 15px;
+        color: #444;
+        padding: 10px;
+        float: right;
+        transition: all 0.2s ease;
+    }
+
+    input:not(:checked)~label:hover,
+    input:not(:checked)~label:hover~label {
+        color: #fd4;
+    }
+
+    input:checked~label {
+        color: #fd4;
+    }
+
+    input#rate-5:checked~label {
+        color: #fe7;
+        text-shadow: 0 0 20px #952;
+
+    }
+</style>
+<hr>
+    <form>
+        {%csrf_token%}
+        {{form|crispy}}
+    </form>
+
+<body>
+    <div class="container">
+        <div class="row">
+            {% for object in product_item %}
+
+            <div class="col-md-6">
+                <img src="{{object.image.url}}">
+            </div>
+            <div class="col-md-6" style="padding-top: 40px;">
+                <h1 class="detailsh">{{ object.title}}</h1>
+                <p class="details">{{object.price}} RF</p>
+                <p class="details"><a href="{% url 'shippingpolicy' %}"><span
+                            style="color:#000;text-decoration: underline;">
+                            shipping</span></a> calculated at checkout.</p>
+
+                <a href="{% url 'add-to-cart' object.id %}" class="btn btn-outline-dark word"><span>ADD TO
+                        CART</span></a>
+                <a href="{% url 'checkout' %}" class="btn btn-dark word"><span>BUY IT NOW</span></a>
+
+                <h5 class="detailsp"><strong>BEST FOR SENSITIVE SKIN</strong></h5>
+                <p class="details">{{object.description}}</p>
+                <h5 class="details"><strong> HOW TO USE:</strong></h5>
+                <p class="details">{{object.product_usage}}</p>
+                {% endfor %}
+                <div class="card mt-6 pt-5">
+                    <h4 class="review-h">CUSTOMERS REVIEWS</h4>
+                    <div class="row" style="padding-top: 13px;">
+                        <div class="col-md-9">
+                            <p>No reviews yet</p>
+                        </div>
+               
+                        <div class="col-md-3">
+                            <a href="#" style="color: #000;">Write a review</a>
+                        </div>
+                    </div>
+                    <hr>
+                    <p class="review-h">Write a review</p>
+                
+                    <div class="md-form mb-4">
+                        
+                        <form class="form" action="" method="post" enctype="multipart/form-data">
+                            
+                        
+                            <label>Name</label>
+                            
+                        <input type="text" id="reviewer" class="form-control" placeholder="Enter your name">
+                        
+                    </div>
+                    <div class="md-form mb-4">
+                        <label>Email</label>
+                        <input type="text" id="email" class="form-control" placeholder="john.smith@gmail.com">
+
+                    </div>
+                    <label>Rating</label>
+                    <div class="rating">
+                        <div class="star-widget">
+                            <input type="radio" name="rate" id="rate-5">
+                            <label for="rate-5" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-4">
+                            <label for="rate-4" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-3">
+                            <label for="rate-3" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-2">
+                            <label for="rate-2" class="fas fa-star"></label>
+                            <input type="radio" name="rate" id="rate-1">
+                            <label for="rate-1" class="fas fa-star"></label>
+                           
+                        </div>
+                    </div>
+                    <div class="md-form mb-4">
+                        <label>Review Title</label>
+                        <input type="text" id="title-review" class="form-control" placeholder="Your review title">
+
+                    </div>
+                    <div class="md-form mb-4">
+                        <label>Body of Review (300)</label>
+                        <textarea type="text" id="body-review" class="form-control" placeholder="Your review here"></textarea>
+
+                    </div>
+                    <br>
+                    <input type="submit" class="btn btn-dark word"  value="Post">
+       
+                        </form>
+                        
+                    <hr>
+                    <div>
+                       
+                       
+                      
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+{% endblock %}

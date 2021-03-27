@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    .container {
+        text-align: center;
+        padding-top: 60px;
+    }
+
+    .container_b {
+        padding-top: 60px;
+    }
+
+    .p_glow {
+        margin: auto;
+        width: 95%;
+        letter-spacing: 2.5px;
+        font-family: 'Questrial', sans-serif;
+
+    }
+
+    .h_glow {
+        letter-spacing: 2.5px;
+        padding-top: 30px;
+    }
+
+ 
+
+    .btn {
+        border-radius: 0;
+        font-weight: 300;
+        margin-bottom: 30px;
+        padding-left: 100px;
+        padding-right: 100px;
+        margin-top: 50px;
+
+    }
+
+    .second_image {
+        padding-top: 60px;
+
+    }
+</style>
+
+<hr>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="https://res.cloudinary.com/auca/image/upload/v1615486830/home_pic_efnncf.png">
+            </div>
+            <div class="col-md-6">
+                <p class="p_glow">Glow Girl is a website which offers effective and professional natural,organic and biodynamic skin care 
+                    products to leading spas worldwide.
+                </p>
+                <a href="shop/" class="btn btn-dark">SHOP NOW</a>
+
+            </div>
+        </div>
+        <div class="row container_b">
+            <div class="col-md-6">
+                <h2 class="h_glow">#GlowGetters</h2>
+                <p class="p_glow">we looked at a cross-section of the best organic and natural skin care products on the market.
+                    we then collect alist of the most commonly used products for you guys.
+                    Remember to keep updated by following us on @shopglow below.
+                </p>
+                <a href="https://www.instagram.com/"><button class="btn btn-dark">GLOW GIRL INSTAGRAM</button></a>
+
+            </div>
+            <div class="col-md-6">
+                <img class="second_image"
+                    src="https://res.cloudinary.com/auca/image/upload/v1615489558/home_pic2_uz5qlg.png">
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+{% endblock content %}

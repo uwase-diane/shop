@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+  .container-p{
+      padding-top: 25px;
+      font-size: 1.1rem;
+      color: #545454;
+      letter-spacing: 1.2px;
+  }
+</style>
+
+<hr>
+<body>
+    
+        {% if items %}
+    {% for obj in items %}
+ <div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <img src="{{ obj.image.url }}" style="width: 30%;">
+            
+        </div>
+        <div class="col-md-6">
+            <a href="{% url 'product' obj.id %}" style="color: #000;"><p class="container-p">{{ obj.title }}</p>
+        </div>
+        <div class="col-md-2">
+            <p class="container-p">{{ obj.price }} RF</p>
+        </a>
+        </div>
+    </div>
+ </div>
+ <hr>
+    {% endfor %}
+    {% endif %}
+</body>
+
+{% endblock %}
+
+
+
+
+   
+

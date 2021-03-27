@@ -1,0 +1,91 @@
+{% load static %}
+{% load cart_template_tags %}
+<style>
+    li a{
+        color: #000;
+        font-family: 'Questrial', sans-serif;
+    }
+    .fa{
+        margin-right: 20px;
+    }
+    h1{
+        color: #fff;
+    }
+    .badge{
+        position: absolute;
+        top: -7px;
+        right: 4px;
+        width: 16px;
+        height: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+         border-radius: 50%;
+         background-color: #000;
+         color: #fff;
+    }
+ 
+    .container-fluid{
+        background-color: #222;
+        padding: 5px;
+    }
+    .container-fluid p{
+        color: #fff;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+</style>
+
+    <div class="container-fluid">
+        <p>Automatic discounts on orders over 80k!</p>
+    </div>
+
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="{%url 'index'%}"><img src="https://res.cloudinary.com/auca/image/upload/v1615485201/glow_iekkot.png"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+    aria-controls="navbarTogglerdemo02" aria-expanded="false" aria-label="Toggle navigaion">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'index'%}">Home</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{%url 'products'%}">Shop</a>
+            </li>
+        </ul>
+        
+        <a data-toggle="modal" data-target=".bd-example-modal-lg" type="submit"><i class="fa fa-search"
+                aria-hidden="true"></i></a>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <h1>Search </h1>
+                <div class="modal-content">
+                    <form action="{% url 'search' %}">
+                        <input class="form-control mr-sm-2" name="title" type="search" placeholder="Search">
+                    </form>
+
+                </div>
+            </div>
+            
+        </div>
+        {% if request.user.is_authenticated %}
+        <!-- <span class="badge red z-depth-1 mr-1">0</span> -->
+            
+        <a href="{% url 'order_summary' %}" style="color: #000; position: relative;">
+            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+            <span class="badge">{{ request.user|cart_item_count }}</span>
+        </a>
+        <a href="{% url 'account_logout' %}" style="color: #000;font-family: 'Questrial', sans-serif;" class="clearfix d-none d-sm-inline-block">Logout</a>
+        {% else %}
+        <a href="{% url 'account_login' %}" style="color: #000;font-family: 'Questrial', sans-serif;" class="clearfix d-none d-sm-inline-block">Login /</a>
+        <a href="{% url 'account_signup' %}" style="color: #000;font-family: 'Questrial', sans-serif;" class="clearfix d-none d-sm-inline-block"> signup</a>
+     
+        {% endif %} 
+    </div>
+</nav>
