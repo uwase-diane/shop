@@ -94,10 +94,6 @@
     }
 </style>
 <hr>
-    <form>
-        {%csrf_token%}
-        {{form|crispy}}
-    </form>
 
 <body>
     <div class="container">
@@ -122,28 +118,25 @@
                 <p class="details">{{object.description}}</p>
                 <h5 class="details"><strong> HOW TO USE:</strong></h5>
                 <p class="details">{{object.product_usage}}</p>
-                {% endfor %}
+               
                 <div class="card mt-6 pt-5">
                     <h4 class="review-h">CUSTOMERS REVIEWS</h4>
                     <div class="row" style="padding-top: 13px;">
                         <div class="col-md-9">
                             <p>No reviews yet</p>
                         </div>
-               
                         <div class="col-md-3">
                             <a href="#" style="color: #000;">Write a review</a>
                         </div>
                     </div>
                     <hr>
                     <p class="review-h">Write a review</p>
-                
                     <div class="md-form mb-4">
-                        
-                        <form class="form" action="" method="post" enctype="multipart/form-data">
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {%csrf_token%}
+             
                             
-                        
                             <label>Name</label>
-                            
                         <input type="text" id="reviewer" class="form-control" placeholder="Enter your name">
                         
                     </div>
@@ -180,14 +173,14 @@
                     </div>
                     <br>
                     <input type="submit" class="btn btn-dark word"  value="Post">
-       
                         </form>
                         
                     <hr>
                     <div>
-                       
-                       
-                      
+                        <p>{{object.review_title}}</p>
+                        <span><small>{{object.date|date:"F d,Y"}}</small></span>
+                        <span>{{pro.user}}</span>
+
                     </div>
                 </div>
             </div>
@@ -196,5 +189,5 @@
     </div>
 
 </body>
-
+{% endfor %}
 {% endblock %}

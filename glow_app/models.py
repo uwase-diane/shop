@@ -79,6 +79,7 @@ class Orderitem(models.Model):
     def get_final_price(self):
         return  self.get_total_item_price()
 
+    
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -86,7 +87,8 @@ class Order(models.Model):
     start_date = models.DateTimeField(auto_now_add=True)
     ordered_date = models.DateTimeField()
     ordered = models.BooleanField(default=False)
-    #references the billingaddress when order is complete
+  
+   #references the billingaddress when order is complete
     billing_address = models.ForeignKey('BillingAddress', on_delete=models.SET_NULL, blank=True,null=True)
 
 
@@ -95,9 +97,15 @@ class Order(models.Model):
 
     def get_total(self):
         total = 0
+        total_discount = 0
         for order_item in self.items.all():
             total = total + order_item.get_final_price()
-        return total        
+            if total >= 80000:
+                total_discount = (total * 5)/100
+                return total - total_discount
+        
+        return total  
+                 
 
 
 class BillingAddress(models.Model):
@@ -127,7 +135,7 @@ class Review(models.Model):
     review_body = models.CharField(max_length= 200)
     review_title = models.CharField(max_length=50)
     date = models.DateTimeField(auto_now_add=True, null=True)
-    # product_review = models.CharField(Item,  on_delete=models.CASCADE)
+    product_review = models.ForeignKey(Item, on_delete=models.CASCADE,null=True)
 
     def save_review(self):
         self.save()

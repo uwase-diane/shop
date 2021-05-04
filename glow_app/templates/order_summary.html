@@ -51,9 +51,9 @@
 
                     <td>{{ order_item.item.price }} RF</td>
                     <td>
-                        <a href="{% url 'remove-single-item' order_item.item.id %}" class="fas fa-minus mr-2" style="color:#545454;"></a>
+                        <a href="{% url 'remove-single-item' order_item.item.id %}" class=" fas fa-minus mr-2" style="color:#545454;"></a>
                         {{ order_item.quantity }}
-                        <a href="{% url 'add-to-cart' order_item.item.id %}" class="fas fa-plus ml-2" style="color:#545454;"></a> 
+                        <a href="{% url 'add-to-cart' order_item.item.id %}" class=" fas fa-plus ml-2" style="color:#545454;"></a> 
                     </td>
                     <!-- <td>{{ order_item.quantity }}</td> -->
                     <td>{{ order_item.get_total_item_price }} RF
@@ -90,6 +90,7 @@
                     style="text-align: center;font-family: 'Questrial', sans-serif; ;letter-spacing: 1.5px;">
                     <p>Order Total <span style="margin-left: 80px;">{{ object.get_total }} RF</span></p>
                     <hr>
+                    
                     <p style="font-size:13px;letter-spacing: 1.5px;color: #545454;">Taxes and <a
                             href="{% url 'shippingpolicy' %}"><span style="color:#000;text-decoration: underline;">
                                 shipping</span></a> calculated at checkout</p>

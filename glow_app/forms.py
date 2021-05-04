@@ -1,6 +1,8 @@
 from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
+from .models import Review
+
 
 PAYMENT_CHOICES = (
     ('S', 'Stripe'),
@@ -51,9 +53,10 @@ class SubscribeForm(forms.Form):
     email = forms.EmailField(label='Email Address')
 
 
-class ReviewForm(forms.Form):
-    reviewer = forms.CharField()
-    email = forms.EmailField()
-    review_title = forms.CharField()
-    review_body = forms.CharField()
+class ReviewForm(forms.ModelForm):
+
+    class Meta:
+        model = Review
+        exclude = ['reviewer','review_title','review_body']
+    
     

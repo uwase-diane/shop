@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse, Http404,HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Item, Order, Orderitem, Profile, BillingAddress,SubscribeRecipients,Category
+from .models import Item, Order, Orderitem, Profile, BillingAddress,SubscribeRecipients,Category,Review
 from django.utils import timezone
 from django.views.generic import View
 from .forms import CheckoutForm,SubscribeForm,ReviewForm
@@ -33,6 +33,7 @@ def product_category(request, category):
 
 def product_details(request, id):
     product_item = Item.objects.filter(id=id)
+  
     return render(request, "product_details.html", {"product_item": product_item})
 
 
@@ -162,19 +163,22 @@ def remove_single_item(request, id):
         messages.info(request, "You don't have an active order")
         return redirect("product", id=id)
 
-def add_review(request, id):
-    current_user = request.user
-    if request.method == 'POST':
-        form = ReviewForm(request.POST, request.FILES)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.user = current_user
-            review.save()
-            return HttpResponseRedirect(request.path_info)
+# def add_review(request, item_id):
+#     current_user = request.user
+#     product_items = Item.objects.filter(id=item_id).first()
+#     if request.method == 'POST':
+#         form = ReviewForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             review = form.save(commit=False)
+#             review.reviewer = current_user
+#             review.review_title = product_items
+#             review.review_body = product_items
+#             review.save()
+#             return HttpResponseRedirect(request.path_info)
     
-    else:
-        form = ReviewForm()
-    return render(request, 'product_details.html', {"form":form})        
+#     else:
+#         form = ReviewForm()
+#     return render(request, 'product_details.html', {"form":form, "item_id":item_id})        
 
 
 class CheckoutView(View):
