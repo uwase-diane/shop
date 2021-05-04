@@ -42,6 +42,7 @@ class Profile(models.Model):
 class Item(models.Model):
     title = models.CharField(max_length=100)
     price = models.IntegerField()
+    discount_item = models.IntegerField(blank=True, null=True)
     image = models.ImageField(upload_to = 'landing_images/')
     description = models.TextField(default='')
     product_usage = models.TextField(default='')

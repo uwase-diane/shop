@@ -48,7 +48,13 @@
           <h5 class="title" ><strong>{{item.title}}</strong></h5>
         
         <hr>
-        <p class="title">{{item.price}} RF</p>
+        <p class="title">
+          {% if item.discount_item %}
+          {{item.discount_item}} RF
+          {% else %}
+          {{item.discount_item}} RF
+          {% endif %}
+        </p>
       </a>
       </div>
     </div>

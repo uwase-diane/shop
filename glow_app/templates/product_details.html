@@ -105,7 +105,17 @@
             </div>
             <div class="col-md-6" style="padding-top: 40px;">
                 <h1 class="detailsh">{{ object.title}}</h1>
-                <p class="details">{{object.price}} RF</p>
+                <p class="details">
+                    {% if object.discount_item %}
+                    <span class="mr-1">
+                        <del>{{object.price}} RF</del>
+                    </span>
+                    <span>{{object.discount_item}} RF</span>
+                    
+                    {% else %}
+                    <span>{{object.price}} RF</span>
+                    {% endif %}
+                </p>
                 <p class="details"><a href="{% url 'shippingpolicy' %}"><span
                             style="color:#000;text-decoration: underline;">
                             shipping</span></a> calculated at checkout.</p>
